@@ -1,0 +1,81 @@
+<div class="shoppingCart-heading"> 
+  {% if cart.item_count != 0%}
+    <h1>Your Cart</h1>
+    <a href="javascript:history.back()">Continue Shopping?</a>
+  {% endif %} 
+</div>
+
+{% if cart.item_count > 0 %}
+<form action="/cart" method="post" novalidate>
+  <div class="shopping-cart">      
+
+    <table class="table table-striped">
+      <thead>
+        <th colspan="2">Item</th>
+        <th>Price</th>
+        <th>Qty</th>
+        <th>Total</th>
+        <th></th>
+      </thead>
+      
+      <tbody>
+        {% for item in cart.items %}
+          <tr>
+
+            <td>
+              <div class="checkout-product-img">
+                <a href="{{ item.url | within: collections.all }}">
+                  <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+                </a>
+              </div>
+            </td>
+
+            <td>
+              <div class="checkout-product-title">
+                {{ item.product.title }}
+                {{ item.variant.title }}
+              </div>                   
+            </td>
+
+            <td>{{ item.price | money }}</td>
+
+            <td class="checkout-quantity">
+              <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
+            </td>
+
+            <td>
+              {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
+              
+              {{ item.line_price | money }}
+
+              {% for discount in item.discounts %}
+                {{ discount.title }}
+              {% endfor %}                  
+            </td>
+
+            <td>
+              <a class="checkout-remove" href="/cart/change?line={{ forloop.index }}&amp;quantity=0">Remove</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+
+    </table>
+
+    <div class="shopping-subtotal">
+      <h3>Subtotal:</h3> <p>{{ cart.total_price | | money_with_currency }}</p>
+      <button type="submit" name="update">Update</button>
+      <button type="submit" name="checkout">Checkout</button>
+    </div>
+
+  </div>
+  
+</form>
+
+{% else %}
+  <div class="cart-empty">
+    <h1>Your Cart</h1>
+    <p>Looks like you cart is currently empty!</p>
+    <a href="/collections/all">Start shopping now! {% include 'icon-arrow-right' %}</a>
+  </div>
+{% endif %}

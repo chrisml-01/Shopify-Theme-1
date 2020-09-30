@@ -1,0 +1,167 @@
+<!doctype html>
+<head>
+  <title>{{ page_title }}</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="{{ page_description | escape }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  {{ content_for_header }} <!-- Header hook for plugins -->
+  {{ 'application.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'application.js' | asset_url | script_tag }}
+</head>
+<body>
+    <div class="header">
+      <div class="top-bar">
+        <div class="top-bar-content">
+          <a href="{{collections.footwear.url }}"> 50% OFF | Black Friday Sale!</a>
+        </div>
+      </div>
+
+      <div class="header-container">
+        <div class="header-top">
+          <h1 class="logo">      
+            <a href="{{shop.url}}"><strong>{{shop.name}}</strong></a>       
+          </h1>
+        </div>
+
+        <div class="header-bottom">
+          <nav class="main-menu">
+            <ul class="mainmenu-list">
+              {% for link in linklists.main-menu.links %}
+                <li>
+                  {% assign child_list_handle = link.title | handleize %}
+                    {% if linklists[child_list_handle].links != blank %}
+                      <a class="main-link" href="{{ link.url }}">{{ link.title }} {% include 'icon-down' %}</a>
+                      
+                        <ul class="childmenu-list">
+                          <div class="site-wrap">
+                            {% for childlink in linklists[child_list_handle].links %}
+                          
+                            <li>
+                              <a class="child-link" href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+                            </li>
+                          {% endfor %}
+                          </div>
+                         
+                        </ul>
+                        
+                    {% else %}
+                      <a class="main-link" href="{{ link.url }}">{{ link.title }}</a>
+                    {% endif %}
+                  {% endfor %}
+                </li>
+              </ul>
+
+              <div class="icon-menu">
+                <a href="/search" class="icons-svg">
+                  {% include 'icon-search' %}
+                </a>
+                {% if shop.customer_accounts_enabled %}          
+                      <a href="/account" class="icons-svg"> {% include 'icon-login' %}
+                          {% if customer %}              
+                            {{ 'log out'  | customer_logout_link }}
+                          {% else %}
+                            <!-- {{ 'log in ' | customer_login_link }} -->
+                        {% endif %}         
+                    {% endif %}
+      
+                    <a href="/cart" class="icons-svg">
+                      {% include 'icon-cart' %}
+                    </a>
+              </div>
+
+             
+            </nav>
+          </div>  
+
+        
+
+          
+  
+    </div>
+  </div>
+
+  
+
+  <div class="content-container">
+    <main role="main">
+      {{ content_for_layout }}
+    </main>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+
+      <div class="footer-info">
+
+        <div class="row">
+
+          <div class="col-md-6">
+
+            <div class="footer-newsletter">
+              <h3>Don't miss out</h3>
+              <p>Promotions, new products and sales. Directly to your inbox.</p>
+              <form class="newsletterForm" method="POST" id="sendNewletterForm">
+                <input type="text" id="email" name="email">
+                <button type="submit" name="sendEmail" id="btnNewsletter">{% include 'icon-right'%}</button>
+              </form> 
+            </div>
+  
+            <div class="social-media-container">
+
+              <a href=""> {% include 'icon-facebook' %} </a>
+              <a href=""> {% include 'icon-twitter' %} </a>
+              <a href=""> {% include 'icon-pinterest' %} </a>
+              <a href=""> {% include 'icon-instagram' %} </a>
+              
+            </div>
+
+          </div>
+    
+          <div class="col-md-3">
+
+            <div class="footer-navigation">
+              {% assign menu = linklists.support%}
+              <h3>{{ menu.title}}</h3>
+              {% for link in menu.links %}
+                <div class="footer-menu-link">
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                </div>            
+              {% endfor %}
+    
+            </div>
+    
+          </div>
+    
+          <div class="col-md-3">
+
+            <div class="footer-contact">
+              <h3>Contact</h3>
+              <p>85 Somewhere St. Manila, Philippines info@email.com</p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      
+      
+      <div class="copyright-container">
+        <div class="row">
+          <p>© 2020, <a href="{{shop.url}}">{{shop.name}}</a> | Designed by Chrism.</p>
+        </div>
+      </div>
+      
+
+    </div>
+  </footer>
+
+  
+</body>
+</html>
