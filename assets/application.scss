@@ -19,8 +19,6 @@ body{
     margin: 0 auto;
 }
 .content-container{
-    max-width: 1200px;
-    margin: 0 auto;
     padding: 50px 0;
 
     h1, h2, h3{
@@ -67,8 +65,8 @@ body{
     }
 
     .header-container{
-        width: 1200px;
-        margin: 0 auto;
+        // width: 1200px;
+        // margin: 0 auto;
         // padding: 15px;
 
         .header-top{
@@ -79,66 +77,80 @@ body{
                 font-family: 'Poppins', sans-serif;
                 font-size: large;
             }
-        }
-      
-        .header-bottom{
-            // padding: 15px 0;
-            .main-menu{
-                display: flex;    
-                justify-content: space-between;       
-                ul{
-                    display: flex;
-                    text-align: left;
-                    padding: 0;
-                    a:hover{
+        }       
+        }               
+    }
+
+    .header-bottom{
+        // padding: 15px 0;
+        .main-menu{
+            display: flex;    
+            justify-content: space-between;       
+            ul{
+                display: flex;
+                text-align: left;
+                padding: 0;
+                margin: 1em 0;
+                a{
+                    padding: 10px 30px;
+                    &:hover{
                         color: $color4;
                     }
-                    .childmenu-list{
-                        padding: 0;
-                        display: none;
-                        position: absolute;
-                        width: 100%;
-                        left: 0;
-                        z-index: 1;
-                        &:hover{
-                            color: $color1;
-                        }
-                    }
-                        
-                    li{  
-                        display: block;                
-                        a{
-                            display: block;
-                            // padding-right: 95px;
-                            padding: 0 30px;
-                        }
-                        &:hover{
-                            // background-color: $color1;
-                            border-bottom: $color1 2px solid;
-                            // padding: 10px 5px;
-                            .childmenu-list{  
-                                margin: 5px 0;                          
-                                display: block;
-                                background-color: $color1;
-                                padding: 15px 0;
-                               
-                            }
-                        }
-                    }
-                } 
-                
-                .icon-menu{
+                }
+                .childmenu-list{
                     padding: 0;
-                    text-align: right;
-                    form{
-                        display: flex;
+                    display: none;
+                    position: absolute;
+                    width: 100%;
+                    left: 0;
+                    z-index: 1;
+                    &:hover{
+                        color: $color1;
                     }
+                }
+                    
+                li{  
+                    display: block;                
+                    a{
+                        display: block;
+                        // padding-right: 95px;
+                        // padding: 0 30px;
+                    }
+                    &:hover{
+                        // background-color: $color1;
+                        border-bottom: $color1 2px solid;
+                        // padding: 10px 5px;
+                        .childmenu-list{  
+                            margin: 5px 0;                          
+                            display: block;
+                            background-color: $color1;
+                            padding: 15px 0;
+                           
+                        }
+                    }
+                }
+            } 
+            
+            .icon-menu{
+                padding: 10px 30px;
+                align-items: center;
+                display: flex;
+                form{
+                    display: flex;
+                }
+                a:hover{
+                    color: $color4;
                 }
             }
         }
-        
-        
-    }
+}
+
+.sticky{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999999;
+    background-color: $color2;
 }
 
 
@@ -170,6 +182,11 @@ body{
             padding: 3px 0 ;
             margin-left: 20px;
         }
+    }
+
+    .filter-container{
+        height: 150px;
+        background-color: $color4;
     }
 }
 
@@ -215,6 +232,28 @@ body{
 
 .collection-list {
     text-align: center;
+
+    // figure{
+    //     &::before{
+    //         content: "";
+    //         background-color: $color1;
+    //         width: 100%;
+    //         height: 100%;
+    //         transition: .5s ease;
+    //         opacity: 0;
+    //         position: absolute;
+    //         // top: 50%;
+    //         // left: 50%;
+    //         // transform: translate(-50%, -50%);
+    //         // -ms-transform: translate(-50%, -50%);
+    //         text-align: center;
+    //     }
+    //     &:hover{
+    //         &::before{
+    //             opacity: 1;
+    //         }
+    //     }
+    // }
     
     .large-collection {
         padding: 8px 0;
@@ -232,10 +271,12 @@ body{
                 &:hover{
                     transition: 550mms all ease-in-out;
                     transform: scale(1.1);
+                    
                 }  
                 
             }
-        }        
+        } 
+             
     }
 
     .medium-collection {
@@ -245,11 +286,12 @@ body{
             width: 100%; 
             max-width: 280px;
             overflow: hidden;
-
+       
             .collection-img{
                 height: 280px;
                 width: 280px;
                 object-fit: cover;
+            
 
                 &:hover{
                     transition: 550mms all ease-in-out;
@@ -259,7 +301,23 @@ body{
             }
         }        
     }
+   
 }
+
+// .image-overlay{
+//     content: "";
+//     background-color: $color1;
+//     // width: 100%;
+//     // height: 100%;
+//     transition: .5s ease;
+//     opacity: 0;
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     -ms-transform: translate(-50%, -50%);
+//     text-align: center;
+// }
 
 // ----- PRODUCT PAGE ------
 .product-img-container{
