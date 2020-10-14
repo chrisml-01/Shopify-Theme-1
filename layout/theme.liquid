@@ -13,6 +13,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
   {{ content_for_header }} <!-- Header hook for plugins -->
   {{ 'application.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'slick.scss.css'  | asset_url | stylesheet_tag }}
+
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   
 </head>
 
@@ -31,6 +35,13 @@
             <!-- <a href="{{shop.url}}"><strong>{{shop.name}}</strong></a>  -->
             <a href="{{shop.url}}"><img src="{{ shop_logo_img | img_url: 'medium' }}"></a>      
           </h1>
+          <div class="header-search-bar">
+            <form action="/search" method="get" role="search" class="header-search-bar">
+              <input id="search-item" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search...">
+              <button id="btn-search" type="submit">{% include 'icon-search' %}</button>
+            </form>
+          </div>
+          
         </div>
       </div>
 
@@ -65,9 +76,13 @@
               </ul>
   
               <div class="icon-menu">
-                <a href="/search" class="icons-svg">
+                <!-- <a href="/search" class="icons-svg">
                   {% include 'icon-search' %}
-                </a>
+                </a> -->
+                <!-- <form action="/search" method="get" role="search">
+                  <input id="search-item" type="search" name="q" value="{{ search.terms | escape }}">
+                  <button id="btn-search" type="submit">{% include 'icon-search' %}</button>
+                </form> -->
                 {% if shop.customer_accounts_enabled %}          
                       <a href="/account" class="icons-svg"> {% include 'icon-login' %}
                           {% if customer %}              
@@ -90,9 +105,7 @@
       </div>     
     </div>
 
-  
-
-  <div class="content-container site-wrap">
+  <div class="content-container">
     <main role="main">
       
       {{ content_for_layout }}
@@ -165,8 +178,9 @@
 
     </div>
   </footer>
-
+    {{ 'slick.min.js' | asset_url | script_tag }}
     {{ 'application.js' | asset_url | script_tag }}
+    
     
 </body>
 </html>

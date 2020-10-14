@@ -1,0 +1,13 @@
+{% assign slideshow_img = images["pexels-2.jpg"]%}
+{% assign num = 3%}
+<div class="slideshow-container slideshow">
+    {% for i in (1..num) %}
+        <div>
+            <div class="slideshow-img" style="background-image:url({{ slideshow_img | img_url: '1920x1920'}}); background-position:center;">
+            
+            </div>  
+        </div>
+             
+    {% endfor %}
+      
+</div>

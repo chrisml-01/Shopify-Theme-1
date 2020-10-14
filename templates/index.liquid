@@ -1,39 +1,19 @@
 {% section 'header' %}
 
-<div class="collection-list">
-    <h2>Collections</h2>
-    <div class="row">
-      {% for collection in collections limit: 2%}          
-        <div class="col-md-6 col-6">
-          <div class="large-collection">
-            <a href="{{ collection.url }}">
-              <figure>
-                <img class ="collection-img" src="{{ collection.image | img_url: '1000x1000' }}">
-                <div class="image-overlay">
-                  <button>{{ collection.title}}</button>
-                </div>
-              </figure>            
-            </a> 
-          </div>        
-        </div>
-      {%endfor%}
-    </div>
+<!-- {% section 'slideshow'%} -->
 
-    <div class="row">
-      {% for collection in collections limit: 4%}          
-        <div class="col-md-3 col-6">
-          <div class="medium-collection">
-            <a href="{{ collection.url }}">
-              <figure>
-                <img class ="collection-img" src="{{ collection.image | img_url: 'large' }}">
-                <div class="image-overlay">
-                  <button>{{ collection.title}}</button>
-                </div>
-              </figure>          
-            </a>  
-          </div>
-        </div>
-      {%endfor%}
-    </div>
-         
-</div>
+{% section 'featured-collections' %} 
+
+{% section 'small-collection' %}
+
+{% section 'map'%}
+
+{% section 'testimonial'%}
+
+{% section 'newsletter'%}
+
+<!-- {% section 'image-text'%}
+
+
+
+{% section 'text-columns'%} -->

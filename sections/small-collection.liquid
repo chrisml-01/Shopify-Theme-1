@@ -1,0 +1,21 @@
+<div class="small-collection">
+    <h2 class="site-wrap">Shop by Collection</h2>
+    <div class="small-collection-info site-wrap slider">
+        {% for collection in collections %}
+            <a href="{{collection.url}}">
+                <div class="column">
+                    <h3>{{collection.title}}</h3>
+                </div>      
+            </a>
+        {% endfor %}
+           
+    </div>
+    <div class="site-wrap">
+        <div class="button-container">
+            <button class="prev" value="left">{% include 'icon-left' %}</button>
+            <button class="next" value="right">{% include 'icon-right' %}</button>
+        </div>
+    </div>
+    
+    
+</div>

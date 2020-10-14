@@ -1,0 +1,14 @@
+{% assign num = 4%}
+<div class="site-wrap">
+    <h2 style="text-align: center;">Testimonials</h2>
+    <div class="testimonial-container single-item">
+        {% for i in (1..num) %}
+            <div class="testimonial-info">
+                <h2>{% include 'icon-quotation-mark' %}</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tellus lorem, vehicula in 
+                    aliquam vel, euismod et sem. Sed congue, turpis sit amet tempus euismod, augue tortor tempus turpis, posuere porttitor nunc ante tempor nisl.</p>
+                <h5>- Author</h5>
+            </div>
+        {% endfor %}
+    </div>
+</div>

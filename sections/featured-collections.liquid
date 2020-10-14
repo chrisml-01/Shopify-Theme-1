@@ -1,0 +1,41 @@
+<div class="collection-list site-wrap site-padding">
+    <h2>Collection List</h2>
+
+    <div class="row">
+      {% for collection in collections limit: 2%}          
+        <div class="col-md-6 col-6">
+          <div class="large-collection">
+            <a href="{{ collection.url }}">
+              <figure class="overlay">
+                <img class ="collection-img " src="{{ collection.image | img_url: '1000x1000' }}">
+                <div class="collection-button">
+                  <h2>{{collection.title}}</h2>
+                  <h5>View All</h5>
+                </div>  
+              </figure>                      
+            </a> 
+          </div>        
+        </div>
+      {%endfor%}
+    </div>
+  
+
+    <div class="row">
+      {% for collection in collections limit: 4%}          
+        <div class="col-md-3 col-6">
+          <div class="medium-collection">
+            <a href="{{ collection.url }}">
+              <figure class="overlay">
+                <img class ="collection-img" src="{{ collection.image | img_url: 'large' }}">
+                <div class="collection-button">
+                  <h2>{{collection.title}}</h2>
+                  <h5>View All</h5>
+                </div>
+              </figure>          
+            </a>  
+          </div>
+        </div>
+      {%endfor%}
+    </div>
+         
+</div>

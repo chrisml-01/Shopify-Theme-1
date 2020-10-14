@@ -1,18 +1,19 @@
+{% assign hero_img = images["hero-1.jpeg"]%}
 <div class="banner-section banner-slider">
     <div class="banner-item">
       <div class="banner-row">
-        <div class="overlay">
-          <div class="banner-box" style="background-image:url({{ 'hero.jpeg' | asset_url  }});">
+        <div class="header-overlay">
+          <div class="banner-box" style="background-image:url({{ hero_img | img_url: '1920x900'}}); background-position:center;">
             <!-- banner image -->
           </div>
         </div>
-        <!-- <div class="wrap wrap-px">
-          <div class="banner-info bounce-up in-view" >
-            <h2>Welcome to {{ shop.name }}</h2>
-            <p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your style and story.</p>
-            <a href="{{shop.url}}" class="btn"> Shop Here!</a>
+        <div class="site-wrap">
+          <div class="banner-info ">
+            <h1>Shop our latest summer collection</h1>
+            <!-- <p>Use overlay text to give your customers insight into your brand. <br>Select imagery and text that relates to your style and story.</p> -->
+            <a href="{{shop.url}}"> Shop Now! {% include 'icon-arrow-right' %}</a>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>

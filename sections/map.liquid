@@ -1,0 +1,19 @@
+{% assign hero_img = images["hero-2.jpeg"]%}
+<div class="map-container ">
+    <div class="header-overlay">
+        <div class="map-hero-image" style="background-image:url({{ hero_img | img_url: '1920x900'}}); background-position:center;">
+            
+        </div>
+    </div>  
+    <div class="site-wrap">
+        <div class="map-info">
+            <div class="info-container">
+                <h3>Our Store</h3>
+                <p>85 Somewhere St. Manila, Philippines</p>
+                <button class="map-button">{% include 'icon-map' %}Directions</button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
