@@ -35,12 +35,12 @@
             <!-- <a href="{{shop.url}}"><strong>{{shop.name}}</strong></a>  -->
             <a href="{{shop.url}}"><img src="{{ shop_logo_img | img_url: 'medium' }}"></a>      
           </h1>
-          <div class="header-search-bar">
+          <!-- <div class="header-search-bar">
             <form action="/search" method="get" role="search" class="header-search-bar">
               <input id="search-item" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search...">
               <button id="btn-search" type="submit">{% include 'icon-search' %}</button>
             </form>
-          </div>
+          </div> -->
           
         </div>
       </div>
@@ -76,9 +76,9 @@
               </ul>
   
               <div class="icon-menu">
-                <!-- <a href="/search" class="icons-svg">
+                <a href="/search" class="icons-svg">
                   {% include 'icon-search' %}
-                </a> -->
+                </a>
                 <!-- <form action="/search" method="get" role="search">
                   <input id="search-item" type="search" name="q" value="{{ search.terms | escape }}">
                   <button id="btn-search" type="submit">{% include 'icon-search' %}</button>
@@ -90,19 +90,102 @@
                           {% else %}
                             <!-- {{ 'log in ' | customer_login_link }} -->
                         {% endif %}         
-                    {% endif %}
+                {% endif %}
       
-                    <a href="/cart" class="icons-svg">
-                      {% include 'icon-cart' %} 
-                      {% if cart.item_count != 0 %}
-                      {{ cart.item_count }}
-                      {% endif %}
-                      
-                    </a>
+                <a href="/cart" class="icons-svg">
+                  {% include 'icon-cart' %} 
+                  {% if cart.item_count != 0 %}
+                  {{ cart.item_count }}
+                  {% endif %}
+                  
+                </a>
               </div>            
           </nav>
         </div>       
       </div>     
+
+      <div class="mobile-nav">
+        <div class="mobile-menu">
+          <div class="menu-toggle">
+            <input class="mobile-icon" type="checkbox">
+              <span></span>
+              <span></span>
+              <span></span>
+            
+            
+              <ul class="mainmenu-list">
+
+                 <div class="header-search-bar">
+                  <form action="/search" method="get" role="search" class="header-search-bar">
+                    <input id="search-item" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search...">
+                    <button id="btn-search" type="submit">{% include 'icon-search' %}</button>
+                  </form>
+                </div>
+
+                {% for link in linklists.main-menu.links %}
+                  <li>
+                    {% assign child_list_handle = link.title | handleize %}
+                      {% if linklists[child_list_handle].links != blank %}
+                        <div class="main-link">
+                          <a href="{{ link.url }}">{{ link.title }}</a> 
+                          <button class="btnMore">{% include 'icon-plus'%}</button>
+                        </div>
+                        
+                        
+                          <ul class="childmenu-list" id="childmenu-list">
+                            <div class="site-wrap">
+                              {% for childlink in linklists[child_list_handle].links %}
+                            
+                              <li>
+                                <a class="child-link" href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+                              </li>
+                            {% endfor %}
+                            </div>
+                           
+                          </ul>
+                          
+                      {% else %}
+                        <a class="main-link" href="{{ link.url }}">{{ link.title }}</a>
+                      {% endif %}
+                    {% endfor %}
+                  </li>
+                </ul>
+          </div>
+  
+          <!-- <div class="mobile-search">
+            <a href="/search" class="icons-svg">
+              {% include 'icon-search' %}
+            </a>
+          </div> -->
+        </div>
+        
+      
+
+        <div class="mobile-logo">
+          <span class="logo">      
+            <!-- <a href="{{shop.url}}"><strong>{{shop.name}}</strong></a>  -->
+            <a href="{{shop.url}}"><img src="{{ shop_logo_img | img_url: 'medium' }}"></a>      
+          </span>
+        </div>
+
+        <div class="mobile-cart">
+          {% if shop.customer_accounts_enabled %}          
+            <a href="/account" class="icons-svg"> {% include 'icon-login' %}
+              {% if customer %}              
+                {{ 'log out'  | customer_logout_link }}
+              {% else %}
+                <!-- {{ 'log in ' | customer_login_link }} -->
+            {% endif %}         
+          {% endif%}
+          <a href="/cart" class="icons-svg">
+            {% include 'icon-cart' %} 
+            {% if cart.item_count != 0 %}
+            {{ cart.item_count }}
+            {% endif %}
+            
+          </a>
+        </div>
+      </div>
     </div>
 
   <div class="content-container">
@@ -170,8 +253,11 @@
       
       
       <div class="copyright-container">
-        <div class="row">
-          <p>© 2020, <a href="{{shop.url}}">{{shop.name}}</a> | Designed by Chrism.</p>
+        <div class="copyright-info">
+          <div class="row">
+            <p>© 2020, <a href="{{shop.url}}">{{shop.name}}</a> | Designed by Chrism.</p>
+          </div>
+          
         </div>
       </div>
       

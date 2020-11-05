@@ -1,83 +1,137 @@
-<div class="site-wrap site-padding">
-<div class="shoppingCart-heading"> 
-  {% if cart.item_count != 0%}
-    <h1>Your Cart</h1>
-    <a href="javascript:history.back()">Continue Shopping?</a>
-  {% endif %} 
-</div>
-
-{% if cart.item_count > 0 %}
-<form action="/cart" method="post" novalidate>
-  <div class="shopping-cart">      
-
-    <table class="table table-striped">
-      <thead>
-        <th colspan="2">Item</th>
-        <th>Price</th>
-        <th>Qty</th>
-        <th>Total</th>
-        <th></th>
-      </thead>
-      
-      <tbody>
-        {% for item in cart.items %}
-          <tr>
-
-            <td>
-              <div class="checkout-product-img">
-                <a href="{{ item.url | within: collections.all }}">
-                  <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
-                </a>
-              </div>
-            </td>
-
-            <td>
-              <div class="checkout-product-title">
-                {{ item.product.title }}
-                {{ item.variant.title }}
-              </div>                   
-            </td>
-
-            <td>{{ item.price | money }}</td>
-
-            <td class="checkout-quantity">
-              <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
-            </td>
-
-            <td>
-              {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
-              
-              {{ item.line_price | money }}
-
-              {% for discount in item.discounts %}
-                {{ discount.title }}
-              {% endfor %}                  
-            </td>
-
-            <td>
-              <a class="checkout-remove" href="/cart/change?line={{ forloop.index }}&amp;quantity=0">Remove</a>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-
-    </table>
-
-    <div class="shopping-subtotal">
-      <h3>Subtotal:</h3> <p>{{ cart.total_price | | money_with_currency }}</p>
-      <button type="submit" name="update">Update</button>
-      <button type="submit" name="checkout">Checkout</button>
+<div class="cart-container">
+  <div class="site-wrap site-padding">
+    <div class="shoppingCart-heading"> 
+      {% if cart.item_count != 0%}
+        <h1>Your Cart</h1>
+        <a href="javascript:history.back()">Continue Shopping?</a>
+      {% endif %} 
     </div>
 
-  </div>
+    {% if cart.item_count > 0 %}
+      <form class="large-shopping-cart" action="/cart" method="post" novalidate>
+        <div class="shopping-cart">     
+          
+          <div class="table-shopping-cart">
+            <div class="table-header">
+              <h5>Product</h5>
+              <h5>Price</h5>
+              <h5>Qty</h5>
+              <h5>Total</h5>
+            </div>
+            {% for item in cart.items %} 
+              <div class="table-item">
+                <div class="table-row">
+                  <div class="cart-checkout-details">
+                    <div class="checkout-product-img">
+                      <a href="{{ item.url | within: collections.all }}">
+                        <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+                      </a>
+                    </div>
+    
+                    <div class="checkout-product-info">
+      
+                      <h4>{{ item.product.vendor }}</h4>
+                      <h6>{{ item.product.title }}</h6>
+                      <h6>{{ item.variant.title }}</h6>
+                      <a class="checkout-remove" href="/cart/change?line={{ forloop.index }}&amp;quantity=0">Remove</a> 
+                
+                    </div>
   
-</form>
+                    <div class="checkout-price">
+                      <h6>{{ item.price | money }}</h6>  
+                    </div>
+  
+                    <div class="checkout-quantity-input">
+                      <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
+                    </div>
+  
+                    <div class="checkout-total">
+                      {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
+                          
+                        {{ item.line_price | money }}
+      
+                      {% for discount in item.discounts %}
+                        {{ discount.title }}
+                      {% endfor %}
+                    </div>
+                  </div>
 
-{% else %}
-  <div class="cart-empty">
-    <h1>Your Cart</h1>
-    <p>Looks like you cart is currently empty!</p>
-    <a href="/collections/all">Start shopping now! {% include 'icon-arrow-right' %}</a>
+                </div>
+              </div>
+            {% endfor %}
+           
+          </div>
+
+          <div class="shopping-subtotal">
+            <h3>Subtotal:</h3> <p>{{ cart.total_price | | money_with_currency }}</p>
+            <button type="submit" name="update">Update</button>
+            <button type="submit" name="checkout">Checkout</button>
+          </div>
+
+        </div>
+        
+      </form>
+    
+      <form class="small-shopping-cart" action="/cart" method="post" novalidate>
+        <div class="shopping-cart">
+          
+          <div class="table-item">
+            {% for item in cart.items %}
+              <div class="table-row">
+                <div class="checkout-product-img">
+                  <a href="{{ item.url | within: collections.all }}">
+                    <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+                  </a>
+                </div>
+  
+                <div class="checkout-product-info">
+  
+                  <h4>{{ item.product.vendor }}</h4>
+                  <h6>{{ item.product.title }}</h6>
+                  <h6>{{ item.variant.title }} | {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
+                        
+                    {{ item.line_price | money }}</h6>  
+  
+                  <div class="checkout-feature">
+                    <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
+  
+                    <a class="checkout-remove" href="/cart/change?line={{ forloop.index }}&amp;quantity=0">Remove</a> 
+                    
+                    
+    
+                    <!-- {% for discount in item.discounts %}
+                      {{ discount.title }}
+                    {% endfor %} -->
+                  
+                  </div>
+                 
+                </div>
+              </div>
+              
+              
+            {% endfor %}
+
+            <button type="submit" name="update">Update Cart</button>
+          </div>      
+
+          <div class="shopping-subtotal">
+            <h4>Subtotal:</h3> <h3>{{ cart.total_price | | money_with_currency }}</h4>           
+          </div>
+
+          <div class="subtotal-btn">         
+            <button type="submit" name="checkout">Proceed to Checkout</button>
+          </div>
+
+        </div>
+        
+      </form>
+
+    {% else %}
+      <div class="cart-empty">
+        <h1>Your Cart</h1>
+        <p>Looks like you cart is currently empty!</p>
+        <a href="/collections/all">Start shopping now! {% include 'icon-arrow-right' %}</a>
+      </div>
+    {% endif %}
   </div>
-{% endif %}
 </div>

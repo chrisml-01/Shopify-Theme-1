@@ -1,20 +1,39 @@
 // Put your applicaiton javascript here
 var bottomNavbar = document.getElementById("bottom-nav");
-    var sticky = bottomNavbar.offsetTop;
+var sticky = bottomNavbar.offsetTop;
 
-    console.log(bottomNavbar);
-    console.log(sticky);
+console.log(bottomNavbar);
+console.log(sticky);
 
 
-    function stickyHeader (){
-        if (window.pageYOffset >= sticky) {
-            bottomNavbar.classList.add("sticky");
-        } else {
-            bottomNavbar.classList.remove("sticky");
-        }
+function stickyHeader (){
+    if (window.pageYOffset >= sticky) {
+        bottomNavbar.classList.add("sticky");
+    } else {
+        bottomNavbar.classList.remove("sticky");
     }
+}
 
-    window.onscroll = function(){stickyHeader()};
+window.onscroll = function(){stickyHeader()};
+
+var btnMore = document.getElementById("btn-navMore");
+
+var mainMenuList = $('.mobile-nav .mainmenu-list');
+
+mainMenuList.each(function(i){
+    var btn = $(this).find(".main-link");
+    var btnMore = btn.find(".btnMore"); 
+
+    btnMore.on("click", function(){
+        var childMenuList = $(this).parent().parent().find(".childmenu-list");
+        if (childMenuList.css("display") === "none"){
+            childMenuList.css("display", "block");
+        } else {
+            childMenuList.css("display", "none");
+        }
+    })
+
+});
 
 $('.slider').slick({
     dots: false,

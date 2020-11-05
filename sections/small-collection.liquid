@@ -1,21 +1,47 @@
-<div class="small-collection">
-    <h2 class="site-wrap">Shop by Collection</h2>
-    <div class="small-collection-info site-wrap slider">
-        {% for collection in collections %}
-            <a href="{{collection.url}}">
-                <div class="column">
-                    <h3>{{collection.title}}</h3>
-                </div>      
-            </a>
-        {% endfor %}
-           
-    </div>
-    <div class="site-wrap">
-        <div class="button-container">
-            <button class="prev" value="left">{% include 'icon-left' %}</button>
-            <button class="next" value="right">{% include 'icon-right' %}</button>
+<div class="desktop-view">
+    <div class="small-collection">
+        <h2 class="site-wrap">Shop by Collection</h2>
+        <div class="small-collection-info site-wrap slider">
+            {% for collection in collections %}
+                <a href="{{collection.url}}">
+                    <div class="column">
+                        <h3>{{collection.title}}</h3>
+                    </div>      
+                </a>
+            {% endfor %}
+               
         </div>
+        <div class="site-wrap">
+            <div class="button-container">
+                <button class="prev" value="left">{% include 'icon-left' %}</button>
+                <button class="next" value="right">{% include 'icon-right' %}</button>
+            </div>
+        </div>
+        
+        
     </div>
-    
-    
 </div>
+
+<div class="mobile-view">
+    <div class="small-collection">
+        <h2 class="site-wrap">Shop by Collection</h2>
+        <div class="small-collection-info">
+            <div class="row">
+                {% for collection in collections %}
+                    <div class="col-sm-4">
+                        <a href="{{collection.url}}">
+                            <div class="column">
+                                <h5>{{collection.title}}</h5>
+                            </div>      
+                        </a>
+                    </div>
+               
+                {% endfor %}
+                
+                   
+            </div> 
+        </div>
+             
+    </div>
+</div>
+

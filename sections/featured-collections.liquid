@@ -1,9 +1,10 @@
-<div class="collection-list site-wrap site-padding">
+<div class="desktop-view">
+  <div class="collection-list site-wrap site-padding">
     <h2>Collection List</h2>
 
     <div class="row">
       {% for collection in collections limit: 2%}          
-        <div class="col-md-6 col-6">
+        <div class="col-sm-6 col-md-6 col-lg-6">
           <div class="large-collection">
             <a href="{{ collection.url }}">
               <figure class="overlay">
@@ -22,7 +23,7 @@
 
     <div class="row">
       {% for collection in collections limit: 4%}          
-        <div class="col-md-3 col-6">
+        <div class="col-sm-6 col-md-3 col-lg-3">
           <div class="medium-collection">
             <a href="{{ collection.url }}">
               <figure class="overlay">
@@ -38,4 +39,36 @@
       {%endfor%}
     </div>
          
+  </div>
+</div>
+
+<div class="mobile-view">
+  <div class="collection-list site-padding">
+    <h2>Collection List</h2>
+
+    <div class="row">
+      {% for collection in collections%}          
+        <div class="col-sm-4 col-md-3 col-lg-3">
+          <div class="medium-collection">
+            <a href="{{ collection.url }}">
+              <!-- <figure class="overlay">
+                <img class ="collection-img" src="{{ collection.image | img_url: 'large' }}">
+                <div class="collection-button">
+                  <h5>{{collection.title}}</h5>
+                </div>
+              </figure>           -->
+
+              <figure>
+                <img class ="collection-img" src="{{ collection.image | img_url: 'large' }}">
+                <div class="collection-button">
+                  <h5>{{collection.title}}</h5>
+                </div>
+              </figure>  
+            </a>  
+          </div>
+        </div>
+      {%endfor%}
+    </div>
+         
+  </div>
 </div>

@@ -1,46 +1,48 @@
-<div class="site-wrap site-padding">
-{% paginate search.results by 10 %}
-<div class="search-bar">
+<div class="search-container">
+  <div class="site-wrap site-padding">
+  {% paginate search.results by 10 %}
+  <div class="search-bar">
 
-  <h2>Search Results</h2>
-  {% if search.performed %}
-  <p>{{search.results_count}} {{ search.results_count | | pluralize: 'result', 'results' }} for "{{ search.terms}}"</p>
-  {% endif %}
-  
-  <form action="/search" method="get" role="search">
-    <input id="search-item" type="search" name="q" value="{{ search.terms | escape }}">
-    <button type="submit">{% include 'icon-search' %}</button>
-  </form>
-
-</div>
-
-<div class="search-outputs">
-  <div class="row">
+    <h2>Search Results</h2>
     {% if search.performed %}
-      {% for item in search.results %}
-          <div class="col-md-3 col-6">
-            <div class="product-box">
-              <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-                <figure>   
-                  <img class="product-img" src="{{ item.featured_image.src | img_url: 'large'}}">                                    
-                </figure>         
-              </a>
-              <h5>{{ item.title | link_to: item.url }}</h5>
-              <span class="product-info">{{item.price | money}}</span>
-            </div>          
-
-          </div>
-          {% else %}
-            <p>No results found. Please check your spelling or use a different word.</p> 
-            
-        {% endfor %}
-    
+    <p>{{search.results_count}} {{ search.results_count | | pluralize: 'result', 'results' }} for "{{ search.terms}}"</p>
     {% endif %}
-  </div>
-  
-  {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
-
-</div>
     
-{% endpaginate %}
-</div>
+    <form action="/search" method="get" role="search">
+      <input id="search-item" type="search" name="q" value="{{ search.terms | escape }}">
+      <button type="submit">{% include 'icon-search' %}</button>
+    </form>
+
+  </div>
+
+  <div class="search-outputs">
+    <div class="row">
+      {% if search.performed %}
+        {% for item in search.results %}
+            <div class="col-md-6 col-lg-3 col-6">
+              <div class="product-box">
+                <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+                  <figure>   
+                    <img class="product-img" src="{{ item.featured_image.src | img_url: 'large'}}">                                    
+                  </figure>         
+                </a>
+                <h5>{{ item.title | link_to: item.url }}</h5>
+                <span class="product-info">{{item.price | money}}</span>
+              </div>          
+
+            </div>
+            {% else %}
+              <p>No results found. Please check your spelling or use a different word.</p> 
+              
+          {% endfor %}
+      
+      {% endif %}
+    </div>
+    
+    {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
+
+  </div>
+      
+  {% endpaginate %}
+  </div>
+</div>  
